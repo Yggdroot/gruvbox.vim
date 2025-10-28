@@ -87,7 +87,7 @@ let s:gb = {}
 
 " fill it with absolute colors
 let s:gb.dark0_hard  = ['#1d2021', 234]     " 29-32-33
-let s:gb.dark0       = ['#282828', 235]     " 40-40-40
+let s:gb.dark0       = ['#292929', 235]     " 40-40-40
 let s:gb.dark0_soft  = ['#32302f', 236]     " 50-48-47
 let s:gb.dark1       = ['#3c3836', 237]     " 60-56-54
 let s:gb.dark2       = ['#504945', 239]     " 80-73-69
@@ -107,8 +107,8 @@ let s:gb.light3      = ['#bdae93', 248]     " 189-174-147
 let s:gb.light4      = ['#a89984', 246]     " 168-153-132
 let s:gb.light4_256  = ['#a89984', 246]     " 168-153-132
 
-let s:gb.bright_red     = ['#fb4934', 167]     " 251-73-52
-let s:gb.bright_green   = ['#b8bb26', 142]     " 184-187-38
+let s:gb.bright_red     = ['#e6645a', 167]     " 251-73-52
+let s:gb.bright_green   = ['#9ed072', 107]     " 184-187-38
 let s:gb.bright_yellow  = ['#fabd2f', 214]     " 250-189-47
 let s:gb.bright_blue    = ['#83a598', 109]     " 131-165-152
 let s:gb.bright_purple  = ['#d3869b', 175]     " 211-134-155
@@ -462,7 +462,7 @@ call s:HL('GruvboxOrangeSign', s:orange, s:sign_column, s:invert_signs)
 " General UI: {{{
 
 " Normal text
-call s:HL('Normal', s:fg1, s:bg0)
+call s:HL('Normal', s:fg2, s:bg0)
 
 " Correct background (see issue #7):
 " --- Problem with changing between dark and light on 256 color terminal
@@ -504,7 +504,11 @@ endif
 hi! link NonText GruvboxBg2
 hi! link SpecialKey GruvboxBg2
 
-call s:HL('Visual',    s:none,  s:bg3, s:invert_selection)
+if s:is_dark
+  highlight Visual guifg=NONE guibg=#454545 gui=NONE ctermfg=NONE ctermbg=238 cterm=NONE
+else
+  call s:HL('Visual',    s:none,  s:bg3, s:invert_selection)
+endif
 hi! link VisualNOS Visual
 
 call s:HL('Search',    s:yellow, s:bg0, s:inverse)
@@ -522,7 +526,7 @@ call s:HL('VertSplit', s:bg3, s:vert_split)
 call s:HL('WildMenu', s:blue, s:bg2, s:bold)
 
 " Directory names, special names in listing
-hi! link Directory GruvboxGreenBold
+hi! link Directory GruvboxGreen
 
 " Titles for output from :set all, :autocmd, etc.
 hi! link Title GruvboxGreenBold
@@ -595,7 +599,7 @@ hi! link Keyword GruvboxRed
 " Variable name
 hi! link Identifier GruvboxBlue
 " Function name
-hi! link Function GruvboxGreenBold
+hi! link Function GruvboxGreen
 
 " Generic preprocessor
 hi! link PreProc GruvboxAqua
@@ -651,14 +655,17 @@ endif
 " }}}
 " Diffs: {{{
 
-call s:HL('DiffDelete', s:red, s:bg0, s:inverse)
-call s:HL('DiffAdd',    s:green, s:bg0, s:inverse)
-"call s:HL('DiffChange', s:bg0, s:blue)
-"call s:HL('DiffText',   s:bg0, s:yellow)
-
-" Alternative setting
-call s:HL('DiffChange', s:aqua, s:bg0, s:inverse)
-call s:HL('DiffText',   s:yellow, s:bg0, s:inverse)
+if s:is_dark
+  highlight DiffDelete guifg=NONE guibg=#4a2a2a gui=NONE ctermfg=NONE ctermbg=52 cterm=NONE
+  highlight DiffAdd    guifg=NONE guibg=#1e3a2d gui=NONE ctermfg=NONE ctermbg=23 cterm=NONE
+  highlight DiffChange guifg=NONE guibg=#23425b gui=NONE ctermfg=NONE ctermbg=24 cterm=NONE
+  highlight DiffText   guifg=#292929 guibg=#69b7ca gui=NONE ctermfg=235 ctermbg=178 cterm=NONE
+else
+  call s:HL('DiffDelete', s:red, s:bg0, s:inverse)
+  call s:HL('DiffAdd',    s:green, s:bg0, s:inverse)
+  call s:HL('DiffChange', s:aqua, s:bg0, s:inverse)
+  call s:HL('DiffText',   s:yellow, s:bg0, s:inverse)
+endif
 
 " }}}
 " Spelling: {{{

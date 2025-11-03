@@ -617,8 +617,9 @@ hi! link Constant GruvboxPurple
 " Character constant: 'c', '/n'
 hi! link Character GruvboxPurple
 " String constant: "this is a string"
+let str_color = ['#97c5b5', 152]
 if g:gruvbox_improved_strings == 0
-  call s:HL('String',  s:green, s:none, s:italicize_strings)
+  call s:HL('String',  str_color, s:none, s:italicize_strings)
 else
   call s:HL('String',  s:fg1, s:bg1, s:italicize_strings)
 endif

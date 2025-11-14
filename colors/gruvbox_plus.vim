@@ -660,7 +660,7 @@ if s:is_dark
   highlight DiffDelete guifg=NONE guibg=#4a2a2a gui=NONE ctermfg=NONE ctermbg=52 cterm=NONE
   highlight DiffAdd    guifg=NONE guibg=#1e3a2d gui=NONE ctermfg=NONE ctermbg=23 cterm=NONE
   highlight DiffChange guifg=NONE guibg=#23425b gui=NONE ctermfg=NONE ctermbg=24 cterm=NONE
-  highlight DiffText   guifg=#292929 guibg=#69b7ca gui=NONE ctermfg=235 ctermbg=178 cterm=NONE
+  highlight DiffText   guifg=#292929 guibg=#5fa5b6 gui=NONE ctermfg=235 ctermbg=178 cterm=NONE
 else
   call s:HL('DiffDelete', s:red, s:bg0, s:inverse)
   call s:HL('DiffAdd',    s:green, s:bg0, s:inverse)
